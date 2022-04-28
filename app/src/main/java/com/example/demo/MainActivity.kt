@@ -10,11 +10,22 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.example.demo.ui.theme.DemoTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // TODO 3 Create WorkRequest
+        val workRequest = OneTimeWorkRequestBuilder<MyWorker>()
+            .build()
+
+        // TODO 4 Create WorkManager instance and enqueue work request
+        val workManager = WorkManager.getInstance(this)
+        workManager.enqueue(workRequest)
+
         setContent {
             DemoTheme {
                 // A surface container using the 'background' color from the theme
